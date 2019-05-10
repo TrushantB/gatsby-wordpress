@@ -1,8 +1,11 @@
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
-
-const Header = ({ siteTitle }) => (
+import '../components/layout'
+const Header = (props) => {
+  // const currentPage = this.props.data.wordpressPage;
+  console.log(props)
+    return(
   <header
     style={{
       background: `rebeccapurple`,
@@ -16,21 +19,20 @@ const Header = ({ siteTitle }) => (
         padding: `1.45rem 1.0875rem`,
       }}
     >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h1>
+      <ul className="nav">
+    {
+      props.data.map((item) => {
+        return(
+          <Link to={item.node.slug}>{item.node.slug}</Link>
+          )
+        })
+      }
+      </ul>
+    
     </div>
   </header>
 )
-
+    }
 Header.propTypes = {
   siteTitle: PropTypes.string,
 }
@@ -39,4 +41,20 @@ Header.defaultProps = {
   siteTitle: ``,
 }
 
-export default Header
+export default Header;
+
+// export const pageQuery=graphql`
+//  header {
+//   allWordpressPage {
+//     edges {
+//       node {
+//         id
+//         slug
+//         status
+//         template
+//       }
+//     }
+//   }
+// }
+// }
+// `
