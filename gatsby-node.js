@@ -15,6 +15,20 @@ exports.createPages = async ({ graphql, actions }) => {
           }
         }
       }
+      allWordpressPost{
+        edges {
+          node {
+            title
+            acf{
+              heading
+              description
+              image{
+                source_url
+              }
+            }
+          }
+        }
+      }
     }
   `)
   if (result.errors) {
@@ -27,6 +41,8 @@ exports.createPages = async ({ graphql, actions }) => {
       component:pageTemplate,
       context: {
         id: edge.node.id,
+        slug:edge.node.slug,
+        post:result.data.allWordpressPost.edges
       },
     })
   })

@@ -23,7 +23,7 @@ const Header = (props) => {
     {
       props.data.map((item) => {
         return(
-          <Link to={item.node.slug}>{item.node.slug}</Link>
+          <Link to={item.node.slug}>{item.node.title}</Link>
           )
         })
       }
